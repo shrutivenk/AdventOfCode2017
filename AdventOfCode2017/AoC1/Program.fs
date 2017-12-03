@@ -8,12 +8,12 @@ let main argv =
     
     let compareAndSum intList =
         let seq = intList |> List.toSeq
-        let pairs = seq |> Seq.pairwise |> Seq.append [((Seq.head seq),(Seq.last seq))]
-        
-        Seq.fold(fun sum compare -> 
-            match (compare |> fst) = (compare |> snd) with
-            | true -> sum + (compare |> fst)
-            | false -> sum)
+        let pairs = seq 
+                    |> Seq.pairwise 
+                    |> Seq.append [((Seq.head seq),(Seq.last seq))]
+                    |> Seq.filter(fun (one,two) -> one = two)
+
+        Seq.fold(fun sum pair -> sum + (pair |> fst))
         <| 0
         <| pairs
 
