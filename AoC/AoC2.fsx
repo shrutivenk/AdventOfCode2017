@@ -25,3 +25,31 @@ let checksum =  input.Split([|'\n'|])
              
 printfn "%A" checksum
 
+//let rec recDivide arr =
+
+let evenstevens = 
+        let sorted =    input.Split([|'\n'|])
+                        |> Array.map(fun x -> x.TrimEnd([|'\r'|]).Split([|'\t'|]))
+                        |> Array.map(fun xs ->  xs 
+                                                |> Array.map (fun y -> y |> int)
+                                                |> Array.sortBy(fun x -> x)
+                                                |> Array.toList)
+                        |> Array.toSeq
+
+        let rec findNum input =
+            match input with
+            | [] -> 0
+            | h::t ->   let v = t |> List.tryFind(fun x -> x % h = 0)
+                        match v with
+                        | Some v -> v/h
+                        | None -> findNum t
+
+        sorted |> Seq.sumBy (fun inp -> findNum inp)
+
+printfn "%A" evenstevens
+
+
+        
+
+                                        
+

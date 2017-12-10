@@ -16,3 +16,23 @@ let compareAndSum intList =
 let result = compareAndSum lst
 printfn "%d" result
 
+let halfway intList =
+    let halfway = (List.length intList) / 2
+    let len = List.length intList
+    let arr = List.toArray intList
+    
+    let finalSum =  
+            Array.fold(fun (sum, index) i -> let second = Array.get arr ((index + halfway) % len)
+                                             if i = second then
+                                                (sum + i, index + 1)
+                                              else                                     
+                                                (sum, index + 1))
+            <| (0,0)
+            <| arr
+    
+    finalSum |> fst
+  
+let result2 = halfway lst
+printfn "%d" result2
+                                    
+
